@@ -1,14 +1,20 @@
 package com.example.barang.controller;
 
+import com.example.barang.persistence.dao.ItemsDao;
+import com.example.barang.persistence.domain.Items;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import static com.example.barang.util.constants.PATH_RETURNS;
+import java.util.List;
 
 @RestController
-public class returnController {
+public class ReturnController {
+    @Autowired
+    ItemsDao itemDao;
     @PostMapping(value = "/pending/returns")
-    public String pendingReturns() {
-       return "/pending/returns";
+    public List<Items> pendingReturns() {
+
+       return itemDao.GetAll();
     }
     @PostMapping(value = "returns")
     public String returns() {
