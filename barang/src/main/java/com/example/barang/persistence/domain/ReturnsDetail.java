@@ -18,12 +18,18 @@ public class ReturnsDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "orderReturnId")
-    private int orderReturnId;
+    @Column(name = "returnsId")
+    private int returnsId;
+
+    @Column(name = "sku")
+    private String sku;
 
     @Column(name = "qty")
-    private double qty;
+    private Integer qty;
 
     @Column(name = "qcStatus")
     private String qcStatus;
+
+    @Column(name = "price")
+    private double price;
 }

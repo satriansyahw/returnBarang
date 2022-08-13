@@ -1,24 +1,20 @@
 package com.example.barang.dto.response;
 
-import com.example.barang.dto.request.ReturnsReqDto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @EqualsAndHashCode()
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ReturnsResDto {
-    private Integer returnsId;
-    private double refundAmount;
-    private String orderId;
-    private String status;
-    private List<ReturnsDetailResDto> returnsDetail;
-    private List<ReturnsReqDto> invalidReturns;
+public class ReturnsDetailResDto {
+    private Integer returnsDetailId;
+    private String sku;
+    private Integer qty;
+    private String qcStatus;
+    private double price;
 }

@@ -11,8 +11,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-@Entity(name = "itemSku")
-public class itemSku {
+@Entity(name = "itemsSku")
+public class ItemsSku {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

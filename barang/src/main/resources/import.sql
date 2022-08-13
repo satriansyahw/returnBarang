@@ -11,16 +11,16 @@ insert into items(name)values('Soccer Ball') -- Id = 9
 insert into items(name)values('Nike Mercurial Superfly 8 Elite FG Firm Ground Soccer Cleat') -- Id = 10
 
 -- insert into tbl item_Sku ---
-insert into item_Sku(item_id,sku,qty,current_qty,price)values(1,'MENS-156',10,5,50) -- ID = 1
-insert into item_Sku(item_id,sku,qty,current_qty,price)values(2,'NIKE-7',10,5,110.75) -- ID = 2
-insert into item_Sku(item_id,sku,qty,current_qty,price)values(3,'SOC-1',10,5,25.99) -- ID = 3
-insert into item_Sku(item_id,sku,qty,current_qty,price)values(4,'MU-5091',10,15,25) -- ID = 4
-insert into item_Sku(item_id,sku,qty,current_qty,price)values(5,'NIKE-56',10,5,75.5) -- ID = 5
-insert into item_Sku(item_id,sku,qty,current_qty,price)values(6,'MU-4129',10,5,22.85) -- ID = 6
-insert into item_Sku(item_id,sku,qty,current_qty,price)values(7,'PAR-14',10,5,149.99) -- ID = 7
-insert into item_Sku(item_id,sku,qty,current_qty,price)values(8,'MENS-156',10,5,50) -- ID = 8
-insert into item_Sku(item_id,sku,qty,current_qty,price)values(9,'SOC-1',10,5,25.99) -- ID = 9
-insert into item_Sku(item_id,sku,qty,current_qty,price)values(10,'NIKE-143',10,5,249.99) -- ID = 10
+insert into items_Sku(item_id,sku,qty,current_qty,price)values(1,'MENS-156',10,5,50) -- ID = 1
+insert into items_Sku(item_id,sku,qty,current_qty,price)values(2,'NIKE-7',10,5,110.75) -- ID = 2
+insert into items_Sku(item_id,sku,qty,current_qty,price)values(3,'SOC-1',10,5,25.99) -- ID = 3
+insert into items_Sku(item_id,sku,qty,current_qty,price)values(4,'MU-5091',10,15,25) -- ID = 4
+insert into items_Sku(item_id,sku,qty,current_qty,price)values(5,'NIKE-56',10,5,75.5) -- ID = 5
+insert into items_Sku(item_id,sku,qty,current_qty,price)values(6,'MU-4129',10,5,22.85) -- ID = 6
+insert into items_Sku(item_id,sku,qty,current_qty,price)values(7,'PAR-14',10,5,149.99) -- ID = 7
+insert into items_Sku(item_id,sku,qty,current_qty,price)values(8,'MENS-156',10,5,50) -- ID = 8
+insert into items_Sku(item_id,sku,qty,current_qty,price)values(9,'SOC-1',10,5,25.99) -- ID = 9
+insert into items_Sku(item_id,sku,qty,current_qty,price)values(10,'NIKE-143',10,5,249.99) -- ID = 10
 
 -- insert into tbl order_trans --
 insert into order_trans(item_sku_id,order_id,email,qty)values(1,'RK-478','john@example.com',2)

@@ -12,12 +12,20 @@ import java.util.List;
 @Repository
 public class OrderTransDao {
 
-    private static Logger logger = LogManager.getLogger(OrderTransDao.class);
+    private static final Logger logger = LogManager.getLogger(OrderTransDao.class);
     @Autowired
     private OrderTransRepository repository;
+    @Autowired
+    private ItemsSkuDao itemsSkuDao;
 
     public boolean isAuthorizedReturnUser(String orderId,String email){
-        List<OrderTrans>  checkOrder = repository.findDistinctByOrderIdAndEmail(orderId,email);
+        List<OrderTrans>  checkOrder = repository.findByOrderIdAndEmail(orderId,email);
+        return !checkOrder.isEmpty();
+    }
+
+    public boolean isExistsOrderAndSku(String orderId,String sku){
+        int itemsSkuId = itemsSkuDao.getItemSkuIdBySku(sku);
+        List<OrderTrans>  checkOrder = repository.findByOrderIdAndItemSkuId(orderId,itemsSkuId);
         if(!checkOrder.isEmpty())
             return true;
         else

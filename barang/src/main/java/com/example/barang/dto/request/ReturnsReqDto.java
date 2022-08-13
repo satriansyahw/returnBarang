@@ -13,5 +13,6 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ReturnsReqDto {
     private String orderId;
-    private String qty;
+    private String sku;
+    private int qty;
 }

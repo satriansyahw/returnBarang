@@ -19,7 +19,7 @@ public class Returns {
     private int id;
 
     @Column(name = "orderId")
-    private int orderId;
+    private String orderId;
 
     @Column(name = "status")
     private String status;
