@@ -13,9 +13,17 @@ import java.util.List;
 @Repository
 public interface ReturnsRepository extends JpaRepository<Returns,Integer>, JpaSpecificationExecutor<Returns> {
 @Query(value = " select a.id as returnId,a.order_id as orderId,a.status as status, " +
-        " b.sku as sku, b.qty as qty ,b.qc_status as qcStatus " +
+        " b.sku as sku, b.qty as qty ,b.qc_status as qcStatus , b.price as Price" +
         " from returns a inner join returns_detail b on a.id = b.returns_id " +
         " where a.order_id = :orderId and b.sku = :sku",nativeQuery = true
 )
     List<ReturnsData> getReturnByOrderIdAndSku(@Param("orderId")String orderId, @Param("sku")String sku);
+
+    @Query(value = " select a.id as returnId,a.order_id as orderId,a.status as status, " +
+            " b.sku as sku, b.qty as qty ,b.qc_status as qcStatus , b.price as Price, " +
+            " b.id as itemDetailId "+
+            " from returns a inner join returns_detail b on a.id = b.returns_id " +
+            " where a.id = :id",nativeQuery = true
+    )
+    List<ReturnsData> getReturnsById(@Param("id")Integer orderId);
 }

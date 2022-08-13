@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ReturnsDetailRepository extends JpaRepository<ReturnsDetail,Integer>, JpaSpecificationExecutor<ReturnsDetail> {
+    ReturnsDetail findByIdAndReturnsId(Integer id, Integer returnsId);
 }

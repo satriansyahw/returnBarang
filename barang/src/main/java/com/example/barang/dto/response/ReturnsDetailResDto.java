@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ReturnsDetailResDto {
-    private Integer returnsDetailId;
+    private Integer itemDetailId;
     private String sku;
     private Integer qty;
     private String qcStatus;

@@ -21,4 +21,12 @@ public class ReturnsDetailDao {
     {
         return  repository.saveAll(returnsDetails);
     }
+    public  ReturnsDetail getById(Integer returnsDetailsId)
+    {
+        return  repository.findById(returnsDetailsId).orElse(null);
+    }
+    public  ReturnsDetail getByIdAndreReturnsId(Integer id, Integer returnsId)
+    {
+        return  repository.findByIdAndReturnsId(id,returnsId);
+    }
 }

@@ -14,11 +14,9 @@ import java.util.List;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ReturnsResDto {
+public class ReturnByIdResDto {
     private Integer returnsId;
     private Double refundAmount;
-    private String orderId;
-    private String status;
-    private List<ReturnsDetailResDto> returnsDetail;
-    private List<ReturnsReqDto> invalidReturns;
+    private List<ReturnsDetailResDto> detailItem;
+
 }

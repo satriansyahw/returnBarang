@@ -5,6 +5,7 @@ import com.example.barang.dto.request.ReturnsReqDto;
 import com.example.barang.service.OrderTransService;
 import com.example.barang.service.ReturnsService;
 import com.example.barang.util.DataResponse;
+import com.example.barang.util.GenericResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +31,15 @@ public class ReturnController {
 
         return returnsService.creatingReturns(returnsReqDtos);
     }
-    @PutMapping(value = "returns/{id}/items/{itemsId}/qc/status")
-    public String returnQCStatus(@PathVariable(name = "id") String id,@PathVariable(name = "itemsId") String itemsId) {
-        return "returns/{id}/items/{itemsId}/qc/status__"+id+"___"+itemsId;
+    @PutMapping(value = "returns/{returnsId}/items/{itemsDetailId}/qc/{status}")
+    public GenericResponse returnQCStatus(@PathVariable(name = "returnsId") Integer returnsId
+            , @PathVariable(name = "itemsDetailId") Integer itemsDetailId
+            , @PathVariable(name = "status") String status) {
+        return returnsService.updateReturnsByStatusAndItemDetailId(returnsId,itemsDetailId,status);
     }
     @GetMapping("returns/{id}")
-    public String returnsId(@PathVariable(name = "id") String id) {
-        return "returnsId__"+id;
+    public DataResponse returnsId(@PathVariable(name = "id") Integer id) {
+        return returnsService.getReturnsById(id);
     }
 
 
