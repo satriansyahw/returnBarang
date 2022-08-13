@@ -13,13 +13,13 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder(toBuilder = true)
 @Entity(name = "returnAuth")
-public class ReturnAuth {
+public class ReturnsAuth {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "orderRef")
-    private int orderRef;
+    @Column(name = "orderId")
+    private String orderId;
 
     @Column(name = "email")//registration//saving/transfer/debit
     private String email;
