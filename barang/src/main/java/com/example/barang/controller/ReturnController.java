@@ -2,6 +2,7 @@ package com.example.barang.controller;
 
 import com.example.barang.persistence.dao.ItemsDao;
 import com.example.barang.persistence.domain.Items;
+import com.example.barang.util.DataResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +13,10 @@ public class ReturnController {
     @Autowired
     ItemsDao itemDao;
     @PostMapping(value = "/pending/returns")
-    public List<Items> pendingReturns() {
+    public DataResponse pendingReturns() {
 
-       return itemDao.GetAll();
+       List<Items> result = itemDao.GetAll();
+       return new DataResponse(true,result,null);
     }
     @PostMapping(value = "returns")
     public String returns() {
