@@ -20,7 +20,11 @@ public class ReturnsDao {
     public List<ReturnsData> getReturnByOrderIdAndSku(String orderId,String sku){
         return  repository.getReturnByOrderIdAndSku(orderId,sku);
     }
-    public List<ReturnsData> getReturnById(Integer id){
+    public List<ReturnsData> getReturnDataById(Integer id){
         return  repository.getReturnsById(id);
+    }
+
+    public Returns getReturnsById(Integer id){
+        return  repository.findById(id).orElse(null);
     }
 }

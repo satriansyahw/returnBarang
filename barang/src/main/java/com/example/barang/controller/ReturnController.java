@@ -23,25 +23,29 @@ public class ReturnController {
     ReturnsService returnsService;
 
     @PostMapping(value = "/pending/returns")
-    public DataResponse pendingReturns(@RequestBody PendingReturnsReqDto returnsReqDto) {
+    public DataResponse pendingReturnsAuth(@RequestBody PendingReturnsReqDto returnsReqDto) {
         return orderTransService.pendingReturnsAuth((returnsReqDto));
     }
     @PostMapping(value = "returns")
-    public DataResponse returns(@RequestBody List<ReturnsReqDto> returnsReqDtos ) {
+    public DataResponse creatingReturns(@RequestBody List<ReturnsReqDto> returnsReqDtos ) {
 
         return returnsService.creatingReturns(returnsReqDtos);
     }
     @PutMapping(value = "returns/{returnsId}/items/{itemsDetailId}/qc/{status}")
-    public GenericResponse returnQCStatus(@PathVariable(name = "returnsId") Integer returnsId
+    public GenericResponse updateReturnsDetailByStatusAndItemDetailId(@PathVariable(name = "returnsId") Integer returnsId
             , @PathVariable(name = "itemsDetailId") Integer itemsDetailId
             , @PathVariable(name = "status") String status) {
-        return returnsService.updateReturnsByStatusAndItemDetailId(returnsId,itemsDetailId,status);
+        return returnsService.updateReturnsDetailByStatusAndItemDetailId(returnsId,itemsDetailId,status);
     }
     @GetMapping("returns/{id}")
     public DataResponse returnsId(@PathVariable(name = "id") Integer id) {
         return returnsService.getReturnsById(id);
     }
 
-
+    @PutMapping(value = "returns/{returnsId}/status/{status}")
+    public GenericResponse returnQCStatus(@PathVariable(name = "returnsId") Integer returnsId
+            , @PathVariable(name = "status") String status) {
+        return returnsService.updateReturnsByIdAndStatus(returnsId,status);
+    }
 
 }

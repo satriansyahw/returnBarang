@@ -17,6 +17,7 @@ import java.util.List;
 public class ReturnByIdResDto {
     private Integer returnsId;
     private Double refundAmount;
+    private String status;
     private List<ReturnsDetailResDto> detailItem;
 
 }

@@ -121,7 +121,7 @@ public class ReturnsService {
     public DataResponse getReturnsById(Integer id)
     {
         logger.info("Processing get returns by id");
-        List<ReturnsData> returnsDataList =  returnsDao.getReturnById(id);
+        List<ReturnsData> returnsDataList =  returnsDao.getReturnDataById(id);
         List<ReturnsDetailResDto> returnsDetailResDtos = new ArrayList<>();
         ReturnByIdResDto returnByIdResDto = null;
         if(!returnsDataList.isEmpty()) {
@@ -144,13 +144,14 @@ public class ReturnsService {
 
             returnByIdResDto.setReturnsId(returnsDataList.get(0).getReturnId());
             returnByIdResDto.setRefundAmount(totPrice);
+            returnByIdResDto.setStatus(returnsDataList.get(0).getStatus());
             returnByIdResDto.setDetailItem(returnsDetailResDtos);
         }
         String message = returnByIdResDto !=null ? "Get Returns Data By id " : "No Returns data found ";
         return new DataResponse(true, returnByIdResDto,message);
     }
-    public GenericResponse updateReturnsByStatusAndItemDetailId(Integer returnsId,Integer itemDetailId,String status) {
-
+    public GenericResponse updateReturnsDetailByStatusAndItemDetailId(Integer returnsId,Integer itemDetailId,String status) {
+        logger.info("Processing updateReturnsDetailByStatusAndItemDetailId");
         String message="";
         if(QcStatusEnums.ACCEPTED.name().toLowerCase().equals(status.toLowerCase())
                 | QcStatusEnums.REJECTED.name().toLowerCase().equals(status.toLowerCase())) {
@@ -164,7 +165,6 @@ public class ReturnsService {
                         .price(checker.getPrice())
                         .sku(checker.getSku())
                         .build());
-                logger.info(checker);
                 message = "Item status successfully updated";
             }
             else
@@ -177,5 +177,29 @@ public class ReturnsService {
         }
         return new GenericResponse(true, message);
     }
+    public GenericResponse updateReturnsByIdAndStatus(Integer returnsId,String status) {
+        logger.info("Processing updateReturnsByIdAndStatus");
+        String message="";
+        if(ReturnsStatusEnums.AWAITING_APPROVAL.name().toLowerCase().equals(status.toLowerCase())
+                | ReturnsStatusEnums.COMPLETE.name().toLowerCase().equals(status.toLowerCase())) {
 
+            Returns checker = returnsDao.getReturnsById(returnsId);
+            if(checker !=null) {
+                var ss = returnsDao.saveOrUpdate(Returns.builder()
+                        .id(returnsId)
+                        .status(status.toUpperCase())
+                        .orderId(checker.getOrderId())
+                        .build());
+                message = "Returns status successfully updated";
+            }
+            else
+            {
+                message = "Failed, No returns data found ";
+            }
+        }
+        else {
+            message = "Failed, status unknown";
+        }
+        return new GenericResponse(true, message);
+    }
 }
