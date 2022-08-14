@@ -8,4 +8,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ReturnsAuthRepository extends JpaRepository<ReturnsAuth,Integer>, JpaSpecificationExecutor<ReturnsAuth> {
+    Optional<ReturnsAuth> findByToken(String token);
 }

@@ -1,11 +1,13 @@
 package com.example.barang.util.Jwt;
 
+import com.example.barang.persistence.dao.ReturnsAuthDao;
 import com.example.barang.persistence.domain.ReturnsAuth;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,8 @@ public class JwtTokenUtil  implements Serializable {
     private static final Logger logger = LogManager.getLogger(JwtTokenUtil.class);
     private static final long serialVersionUID = -2550185165452007488L;
 
+    @Autowired
+    private ReturnsAuthDao returnsAuthDao;
     public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60; //5 hours
 
     @Value("${jwt.rahasia}")
@@ -69,7 +73,8 @@ public class JwtTokenUtil  implements Serializable {
     //validate token
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = getUsernameFromToken(token);
-        boolean result =  (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+        boolean isElligleToken=  returnsAuthDao.isElligibleToken(token);
+        boolean result =  (username.equals(userDetails.getUsername()) && !isTokenExpired(token) && isElligleToken);
         return  result;
     }
 }
