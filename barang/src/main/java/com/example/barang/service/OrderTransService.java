@@ -47,7 +47,7 @@ public class OrderTransService {
         {
             logger.error("Error on pendingReturnsAuth :"+ex.getMessage());
         }
-        String message = tokenAuth !=null?" Successfully login": " Failed login";
+        String message = tokenAuth !=null?"Successfully login": "Failed login";
         return new DataResponse(true, tokenAuth,message);
     }
     private String getToken(String orderId,String email)
