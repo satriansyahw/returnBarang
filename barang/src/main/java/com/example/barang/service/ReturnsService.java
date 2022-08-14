@@ -113,7 +113,7 @@ public class ReturnsService {
         {
             logger.error("Error on creatingReturns :"+ex.getMessage());
         }
-        String message =returns!=null ? "Returns processed":" No Returns Data processed";
+        String message =returns!=null ? "Returns processed":"No Returns Data processed";
         return new DataResponse(true, returnsResDto,message);
     }
     private List<ReturnsData> getReturnByOrderIdAndSku(String orderId,String sku){
