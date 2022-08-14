@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import java.util.List;
 
 public interface OrderTransRepository extends JpaRepository<OrderTrans,Integer>, JpaSpecificationExecutor<OrderTrans> {
-    List<OrderTrans> findByOrderIdAndEmail(String orderId, String Email);
+    List<OrderTrans> findByOrderIdAndEmail(String orderId, String email);
     List<OrderTrans> findByOrderIdAndItemSkuId(String orderId,Integer itemSkuId);
+    List<OrderTrans> findByEmail(String email);
 }

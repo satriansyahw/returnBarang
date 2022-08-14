@@ -6,6 +6,7 @@ import com.example.barang.persistence.dao.OrderTransDao;
 import com.example.barang.persistence.dao.ReturnsAuthDao;
 import com.example.barang.persistence.domain.ReturnsAuth;
 import com.example.barang.util.DataResponse;
+import com.example.barang.util.Jwt.JwtTokenUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class OrderTransService {
     private static Logger logger = LogManager.getLogger(OrderTransService.class);
     @Autowired
     private OrderTransDao orderTransDao;
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+
 
     @Autowired
     private ReturnsAuthDao returnsAuthDao;
@@ -42,6 +46,10 @@ public class OrderTransService {
     }
     private String getToken(String orderId,String email)
     {
-        return "Token__"+orderId+"__"+email;
+        String token = jwtTokenUtil.generateToken(ReturnsAuth.builder()
+                        .orderId(orderId)
+                        .email(email)
+                .build());
+        return token;
     }
 }
