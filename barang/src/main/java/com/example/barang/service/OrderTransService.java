@@ -26,20 +26,26 @@ public class OrderTransService {
     private ReturnsAuthDao returnsAuthDao;
 
     public DataResponse pendingReturnsAuth(PendingReturnsReqDto returnsReqDto) {
+        ReturnsAuthResDto tokenAuth=null;
         boolean isAuthUser = orderTransDao.isAuthorizedReturnUser(returnsReqDto.getOrderId(), returnsReqDto.getEmail());
         logger.info("Checking isAuthorizedReturnUser : " + String.valueOf(isAuthUser));
-        ReturnsAuthResDto tokenAuth=null;
-        if (isAuthUser) {
-            String token = this.getToken(returnsReqDto.getOrderId(), returnsReqDto.getEmail());
-            ReturnsAuth returnsAuth = ReturnsAuth.builder()
-                    .orderId(returnsReqDto.getOrderId())
-                    .email(returnsReqDto.getEmail())
-                    .token(token)
-                    .build();
-            returnsAuthDao.Save(returnsAuth);
-            tokenAuth = new ReturnsAuthResDto();
-            tokenAuth.setAccessToken(token);
-            logger.info("Successfully created token");
+        try {
+            if (isAuthUser) {
+                String token = this.getToken(returnsReqDto.getOrderId(), returnsReqDto.getEmail());
+                ReturnsAuth returnsAuth = ReturnsAuth.builder()
+                        .orderId(returnsReqDto.getOrderId())
+                        .email(returnsReqDto.getEmail())
+                        .token(token)
+                        .build();
+                returnsAuthDao.Save(returnsAuth);
+                tokenAuth = new ReturnsAuthResDto();
+                tokenAuth.setAccessToken(token);
+                logger.info("Successfully created token");
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.error("Error on pendingReturnsAuth :"+ex.getMessage());
         }
         String message = tokenAuth !=null?" Successfully login": " Failed login";
         return new DataResponse(true, tokenAuth,message);
